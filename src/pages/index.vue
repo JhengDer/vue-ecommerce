@@ -55,7 +55,7 @@ const modules = [Pagination];
 @media screen and (max-width: 480px) {
   .home {
     .home-content{
-      z-index: 10;
+      z-index: 5;
     }
     position: relative;
   }

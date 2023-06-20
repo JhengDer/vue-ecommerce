@@ -26,7 +26,6 @@ const itemList = ref(null);
 const isItem = ref(false);
 const nonItem = ref("目前尚無商品");
 const isShowMember = ref(false);
-const itemCount = ref(0);
 
 // 按下購物車觸發
 const showCart = async () => {
@@ -54,8 +53,10 @@ const showMember = () => {
   isShowItem.value = false;
 };
 
+const menuClose=ref(null);
 const shopClose = ref(null);
 const memberClose = ref(null);
+
 
 const handleClickOutside = (event) => {
   if (!shopClose.value.contains(event.target)) {
@@ -65,6 +66,9 @@ const handleClickOutside = (event) => {
     if (!memberClose.value.contains(event.target)) {
       isShowMember.value = false;
     }
+  }
+  if (!menuClose.value.contains(event.target)) {
+    isMenuopen.value = false;
   }
 };
 
@@ -85,7 +89,9 @@ onBeforeUnmount(() => {
     <div class="logo">
       <h1>J.D.</h1>
     </div>
-    <button class="menu-btn" @click="menuToggle">Menu</button>
+    <button ref="menuClose" class="menu-btn" @click="menuToggle">
+      <SvgIcons name="IconMenu" />
+    </button>
     <div :class="['menu', { 'menu-open': isMenuopen }]">
       <RouterLink @click="resetMenu" to="/">首頁</RouterLink>
       <RouterLink @click="resetMenu" to="/shop">商店</RouterLink>
@@ -210,6 +216,7 @@ onBeforeUnmount(() => {
       position: relative;
       cursor: pointer;
       .itemList {
+        z-index: 15;
         background-color: $first-color-alt;
         // border: 1px $first-color solid;
         position: absolute;
@@ -279,6 +286,7 @@ onBeforeUnmount(() => {
     position: relative;
     .menu-btn {
       display: block;
+      width: 40px;
       z-index: 10;
     }
     .menu {
@@ -293,11 +301,14 @@ onBeforeUnmount(() => {
       display: flex;
       flex-direction: column;
       z-index: 11;
-      height: 200px;
+      height: 150px;
       top: 60px;
       left: 0;
       background-color: $first-color;
-      opacity: 1;
+      opacity: 0.8;
+      a {
+        color: #ffffff;
+      }
     }
     .profile {
       flex-grow: 0.1;

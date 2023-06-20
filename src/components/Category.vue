@@ -20,7 +20,7 @@ const modules = [Pagination];
       }"
       :breakpoints="{
         '400': {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 10,
         },
         '768': {

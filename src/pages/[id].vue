@@ -87,7 +87,7 @@ const addCartBtn = () => {
     <div v-else>
       <n-grid x-gap="20" y-gap="20" cols="1 600:2">
         <n-gi>
-          <img class="showImg" :src="choseImg" alt="" />
+          <n-space justify="center"><img class="showImg" :src="choseImg" alt="" /></n-space>
           <n-space>
             <div
               @click="changeImg(img, index)"
@@ -99,34 +99,43 @@ const addCartBtn = () => {
             </div>
           </n-space>
         </n-gi>
-        <n-gi>
-          <h3>
-            {{ choseData.name }}
-            <span :class="getClassByStatus(choseData.status)">
-              {{ choseData.status }}
-            </span>
-          </h3>
-          <div class="product__rating">
-            <n-rate readonly :default-value="choseData.rate" allow-half />
-          </div>
-          <div v-if="choseData.issale" class="product__price flex">
-            <span class="new__price">${{ choseData.price }}</span>
-            <span class="old__price">${{ choseData.sale }}</span>
-          </div>
-          <div v-else class="product__price flex">
-            <span class="new__price">${{ choseData.price }}</span>
-          </div>
-          <h5>尺寸</h5>
-          <n-space>
-            <n-radio-group v-model:value="choseSize" name="radiobuttongroup1">
-              <n-radio-button
-                v-for="item in size"
-                :key="item.value"
-                :value="item.value"
-                :label="item.label"
-              />
-            </n-radio-group>
-          </n-space>
+        <n-gi
+          ><n-grid x-gap="20" y-gap="20" cols="2 500:1">
+            <n-gi>
+              <h3>
+                {{ choseData.name }}
+                <span :class="getClassByStatus(choseData.status)">
+                  {{ choseData.status }}
+                </span>
+              </h3>
+              <div class="product__rating">
+                <n-rate readonly :default-value="choseData.rate" allow-half />
+              </div>
+              <div v-if="choseData.issale" class="product__price flex">
+                <span class="new__price">${{ choseData.price }}</span>
+                <span class="old__price">${{ choseData.sale }}</span>
+              </div>
+              <div v-else class="product__price flex">
+                <span class="new__price">${{ choseData.price }}</span>
+              </div>
+            </n-gi>
+            <n-gi>
+              <h5>尺寸</h5>
+              <n-space>
+                <n-radio-group
+                  v-model:value="choseSize"
+                  name="radiobuttongroup1"
+                >
+                  <n-radio-button
+                    v-for="item in size"
+                    :key="item.value"
+                    :value="item.value"
+                    :label="item.label"
+                  />
+                </n-radio-group>
+              </n-space>
+            </n-gi>
+          </n-grid>
           <n-space class="buy">
             <n-button
               class="buyButton"
@@ -147,6 +156,7 @@ const addCartBtn = () => {
 .buy {
   margin-top: 2rem;
   position: relative;
+  margin-bottom: 4rem;
   .buyButton {
     position: absolute;
     top: 0;
@@ -198,5 +208,10 @@ const addCartBtn = () => {
   color: $text-color-light;
   text-decoration: line-through;
   padding-block: 0.875rem;
+}
+@media screen and (max-width: 480px) {
+  .showImg {
+    height: 400px;
+  }
 }
 </style>
